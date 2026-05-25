@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التقارير - سوبر ماركتي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="container mx-auto px-4 py-4">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6 bg-white/10 backdrop-blur rounded-2xl p-4">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <i class="fas fa-chart-bar text-white text-xl"></i>
+            </div>
+            <div>
+                <h1 class="text-2xl font-black text-white">التقارير</h1>
+                <p class="text-white/70 text-sm">تحليل المبيعات والمخزون</p>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <a href="pos.html" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-xl transition">
+                <i class="fas fa-cash-register ml-2"></i> الكاشير
+            </a>
+            <a href="products.html" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-xl transition">
+                <i class="fas fa-boxes ml-2"></i> المنتجات
+            </a>
+            <a href="dashboard.html" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-xl transition">
+                <i class="fas fa-chart-line ml-2"></i> لوحة التحكم
+            </a>
+        </div>
+    </div>
+
+    <!-- تبويبات التقارير -->
+    <div class="bg-white rounded-3xl shadow-2xl overflow-hidden">
+        <div class="border-b">
+            <div class="flex">
+                <button onclick="showTab('sales')" id="tabSalesBtn" class="tab-btn active px-6 py-4 font-bold text-gray-600 hover:text-purple-600 transition">
+                    <i class="fas fa-chart-simple ml-2"></i> تقرير المبيعات
+                </button>
+                <button onclick="showTab('stock')" id="tabStockBtn" class="tab-btn px-6 py-4 font-bold text-gray-600 hover:text-purple-600 transition">
+                    <i class="fas fa-boxes ml-2"></i> تقرير المخزون
+                </button>
+            </div>
+        </div>
+        
+        <div class="p-6">
+            <!-- تبويب المبيعات -->
+            <div id="salesTab" class="tab-content">
+                <div class="flex gap-4 mb-6">
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">من تاريخ</label>
+                        <input type="date" id="startDate" class="p-2 border rounded-lg">
+                    </div>
+                    <div>
+                        <label class="block text-sm text-gray-600 mb-1">إلى تاريخ</label>
+                        <input type="date" id="endDate" class="p-2 border rounded-lg">
+                    </div>
+                    <div class="flex items-end">
+                        <button onclick="loadSalesReport()" class="btn btn-primary">
+                            <i class="fas fa-search ml-2"></i> بحث
+                        </button>
+                    </div>
+                </div>
+                <div id="salesReportContent">
+                    <div class="text-center py-10">
+                        <div class="loading mx-auto"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- تبويب المخزون -->
+            <div id="stockTab" class="tab-content hidden">
+                <div id="stockReportContent">
+                    <div class="text-center py-10">
+                        <div class="loading mx-auto"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/reports.js"></script>
+</body>
+</html>
