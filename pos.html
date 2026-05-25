@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>كاشير - سوبر ماركتي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
+        .cart-item { transition: all 0.3s ease; }
+        .cart-item:hover { transform: translateX(-5px); }
+        .product-card:active { transform: scale(0.98); }
+    </style>
+</head>
+<body>
+
+<div class="container mx-auto px-4 py-4">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-6 bg-white/10 backdrop-blur rounded-2xl p-4">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <i class="fas fa-cash-register text-white text-xl"></i>
+            </div>
+            <div>
+                <h1 class="text-2xl font-black text-white">نقطة البيع</h1>
+                <p class="text-white/70 text-sm">كاشير سوبر ماركتي</p>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <a href="dashboard.html" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-xl transition">
+                <i class="fas fa-chart-line ml-2"></i> لوحة التحكم
+            </a>
+            <a href="products.html" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-xl transition">
+                <i class="fas fa-boxes ml-2"></i> المنتجات
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="grid lg:grid-cols-3 gap-6">
+        <!-- المنتجات -->
+        <div class="lg:col-span-2 bg-white rounded-3xl shadow-2xl overflow-hidden">
+            <div class="p-6 bg-gradient-to-r from-purple-50 to-blue-50 border-b">
+                <div class="relative">
+                    <i class="fas fa-search absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 text-xl"></i>
+                    <input type="text" id="searchInput" 
+                           placeholder="🔍 ابحث بالاسم أو امسح الباركود"
+                           class="w-full p-4 pr-14 border-2 rounded-2xl focus:outline-none focus:border-purple-500 text-lg"
+                           autofocus>
+                    <i class="fas fa-barcode absolute left-5 top-1/2 -translate-y-1/2 text-gray-400 text-xl"></i>
+                </div>
+            </div>
+            <div id="productsGrid" class="p-6 h-[calc(100vh-280px)] overflow-y-auto">
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="col-span-full text-center py-20">
+                        <div class="loading mx-auto"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- السلة -->
+        <div class="bg-white rounded-3xl shadow-2xl h-[calc(100vh-140px)] flex flex-col overflow-hidden sticky top-24">
+            <div class="bg-gradient-to-r from-purple-600 to-blue-600 p-6 text-white">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-2xl font-bold"><i class="fas fa-shopping-cart ml-2"></i>السلة</h2>
+                    <span id="cartCount" class="bg-white/20 px-3 py-1 rounded-full">0</span>
+                </div>
+            </div>
+            <div id="cartItems" class="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50"></div>
+            <div class="border-t p-6 bg-white">
+                <div class="space-y-3">
+                    <div class="flex justify-between">
+                        <span>المجموع</span>
+                        <span id="subtotal" class="font-bold">0.00 EGP</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>الخصم</span>
+                        <input type="number" id="discount" value="0" class="w-28 p-2 border rounded-xl text-center">
+                    </div>
+                    <div class="flex justify-between text-xl font-bold text-purple-600">
+                        <span>الإجمالي</span>
+                        <span id="total">0.00 EGP</span>
+                    </div>
+                    <input type="number" id="paidAmount" placeholder="المدفوع" class="w-full p-3 border rounded-xl text-center text-lg">
+                    <div class="flex justify-between text-green-600">
+                        <span>الباقي</span>
+                        <span id="change">0.00 EGP</span>
+                    </div>
+                    <select id="paymentMethod" class="w-full p-3 border rounded-xl">
+                        <option value="cash">💰 كاش</option>
+                        <option value="card">💳 كارد</option>
+                        <option value="mobile">📱 محفظة</option>
+                    </select>
+                    <button onclick="completeSale()" class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white p-3 rounded-xl font-bold text-lg hover:scale-105 transition">
+                        ✅ إنهاء الفاتورة
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/pos.js"></script>
+</body>
+</html>
