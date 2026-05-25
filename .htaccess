@@ -1,0 +1,41 @@
+# تشغيل إعادة الكتابة
+RewriteEngine On
+
+# منع عرض محتويات المجلدات
+Options -Indexes
+
+# حماية ملفات API
+<FilesMatch "\.(php)$">
+    Order Deny,Allow
+    Allow from all
+</FilesMatch>
+
+# إعدادات الخطأ المخصصة
+ErrorDocument 404 /404.html
+ErrorDocument 403 /403.html
+
+# تأمين مجلد API
+<Directory "api">
+    Options -Indexes
+</Directory>
+
+# إعدادات التخزين المؤقت للملفات الثابتة
+<FilesMatch "\.(css|js|jpg|jpeg|png|gif|ico)$">
+    Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
+
+# تمكين CORS (إذا كنت ستستخدم API من مجالات مختلفة)
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type"
+</IfModule>
+
+# تأمين ملفات قاعدة البيانات
+<FilesMatch "\.(sql|sqlite|db)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# الصفحة الرئيسية الافتراضية
+DirectoryIndex index.html pos.html
