@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - سوبر ماركتي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+<div class="container mx-auto px-4">
+    <div class="max-w-md mx-auto">
+        <div class="card">
+            <div class="card-header text-center">
+                <div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-store text-white text-2xl"></i>
+                </div>
+                <h2 class="text-2xl">مرحباً بك</h2>
+                <p class="text-white/80 text-sm mt-1">سجل الدخول للوصول إلى لوحة التحكم</p>
+            </div>
+            <div class="card-body">
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-user ml-2"></i> اسم المستخدم
+                        </label>
+                        <input type="text" id="username" class="form-input" placeholder="admin" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">
+                            <i class="fas fa-lock ml-2"></i> كلمة المرور
+                        </label>
+                        <input type="password" id="password" class="form-input" placeholder="••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full">
+                        <i class="fas fa-sign-in-alt ml-2"></i>
+                        تسجيل الدخول
+                    </button>
+                </form>
+                <div class="mt-6 text-center text-sm text-gray-500">
+                    <p>بيانات تجريبية: admin / admin123</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function handleLogin(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    
+    // مؤقتاً - سيتم ربطه بـ API لاحقاً
+    if (username === 'admin' && password === 'admin123') {
+        localStorage.setItem('loggedIn', 'true');
+        window.location.href = 'dashboard.html';
+    } else {
+        showToast('بيانات الدخول غير صحيحة', 'error');
+    }
+}
+
+function showToast(msg, type) {
+    const t = document.createElement('div');
+    t.className = `toast ${type}`;
+    t.innerHTML = `<i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} ml-2"></i>${msg}`;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 3000);
+}
+</script>
+
+</body>
+</html>
